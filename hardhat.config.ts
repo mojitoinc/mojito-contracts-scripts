@@ -46,7 +46,7 @@ const config: HardhatUserConfig = {
     },
     rinkeby: {
       chainId: 4,
-      url: `https://rinkeby.infura.io/v3/21975c917826414e8413050bfe756d8d`,
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
       //gas: 2100000,
       gasPrice: 5000000000,
       gasMultiplier: 3,
@@ -107,14 +107,14 @@ const config: HardhatUserConfig = {
 if (process.env.ALCHEMY_API_KEY) {
   if (process.env.MAINNET_PRIVATE_KEY) {
     config.networks!.mainnet = {
-      url: `https://eth-mainnet.alchemyapi.io/v2/ks0TX6jjbR_QXqSkO2rzkNaPxbRC1pND`,
-      accounts: [`0x776b5bb20b8b5fef96d2c264454bd4ddf7f0a15b9f65148936f30b1161f546d9`],
+      url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
+      accounts: [`0x${process.env.MAINNET_PRIVATE_KEY}`],
     };
   }
   if (process.env.RINKEBY_PRIVATE_KEY) {
     config.networks!.rinkeby = {
-      url: `https://eth-rinkeby.alchemyapi.io/v2/ks0TX6jjbR_QXqSkO2rzkNaPxbRC1pND`,
-      accounts: [`0x776b5bb20b8b5fef96d2c264454bd4ddf7f0a15b9f65148936f30b1161f546d9`],
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
+      accounts: [`0x${process.env.RINKEBY_PRIVATE_KEY}`],
     };
   }
 };
