@@ -1,0 +1,20 @@
+import { ethers } from "hardhat";
+import { BigNumber, Bytes, Contract, Signer } from "ethers";
+
+let extensionContract: Contract;
+
+async function main() {
+  const [account] = await ethers.getSigners();
+  const ExtensionContract = await ethers.getContractFactory("ProvenanceExtension1155");
+  extensionContract = await ExtensionContract.attach("");
+  const userWalletAddress =" ";
+  await extensionContract.approveAdmin(userWalletAddress);
+  console.log(await extensionContract.isAdmin(userWalletAddress));
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
