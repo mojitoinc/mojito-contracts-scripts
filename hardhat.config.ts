@@ -77,10 +77,10 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      polygon: "8QXJTKHHJXYENKH48NDC2S177I4Z43IMGZ",
-      goerli: "Q54HT9CI9BXTQUN5NNISDHC1BCWENJQ7V6",
-      mainnet: "Q54HT9CI9BXTQUN5NNISDHC1BCWENJQ7V6",
-      mumbai:"8QXJTKHHJXYENKH48NDC2S177I4Z43IMGZ"
+      polygon: process.env.POLYGON_ETHERSCAN_APIKEY,
+      goerli: process.env.GOERLI_ETHERSCAN_APIKEY,
+      mainnet: process.env.MAINNET_ETHERSCAN_APIKEY,
+      mumbai: process.env.MUMBAI_ETHERSCAN_APIKEY
     },
     customChains: [
       {
