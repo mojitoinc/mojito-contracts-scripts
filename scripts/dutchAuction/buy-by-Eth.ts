@@ -31,16 +31,18 @@ async function main() {
     console.log("Current Price",currentPrice)
 
     const buyingAmount = currentPrice.mul(totalBuytoken);                       // calcualted Buying amount based on current price and no of tokens
-    
+    const tax = 0;                                                              // default should be zero
     const quantity = 0;                                                         // Quantity should be zero for ERC721
     const BlacklistProof = ethers.constants.HashZero;                           // default should be zero
     
     // call to buy the token(s)
     let receipt = await Auction.buy(
-      auctionId,buyingAmount,
+      auctionId,
+      buyingAmount,
+      tax,
       totalBuytoken,quantity,
       [BlacklistProof],
-      { value: buyingAmount}
+      { value: buyingAmount+tax}
       );
 
     console.log(`\n transaction hash of buy, tx hash: ${receipt.hash}`);
