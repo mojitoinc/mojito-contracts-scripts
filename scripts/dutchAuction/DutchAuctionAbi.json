@@ -1,0 +1,1166 @@
+[
+    {
+      "inputs": [
+        {
+          "internalType": "contract IRoyaltyEngineForDutch",
+          "name": "_royaltySupport",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "dutchUtilityArg",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "AdminApproved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "AdminRevoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "auctionId",
+          "type": "string"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "nftContractAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "startTokenId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "endTokenId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "quantity",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenOwner",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "noOfTokens",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "walletLimit",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "txnLimit",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isMint",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isInstantDeliver",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isRebate",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "enum IDutchAuction.typeOfSale",
+                  "name": "saleType",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "blacklistedBuyers",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct IDutchAuction.NftContractList",
+              "name": "collectionList",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint128",
+              "name": "startingPrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint128",
+              "name": "reservedPrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint128",
+              "name": "reducePrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint32",
+              "name": "auctionStartTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "auctionEndTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "timeForPriceDecrement",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "halfLifeTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "address",
+              "name": "paymentCurrency",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address payable",
+                  "name": "paymentSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "taxSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "commissionAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "platformSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint16",
+                  "name": "commissionFeePercentage",
+                  "type": "uint16"
+                },
+                {
+                  "internalType": "uint16",
+                  "name": "platformFeePercentage",
+                  "type": "uint16"
+                }
+              ],
+              "internalType": "struct IDutchAuction.SettlementList",
+              "name": "payoutList",
+              "type": "tuple"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct IDutchAuction.DutchAuctionList",
+          "name": "list",
+          "type": "tuple"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "name": "AuctionCreatedorUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "auctionId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalBuyTokens",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "Quantity1155",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "currentPrice",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "buyingPrice",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tax",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "buyer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "nftIds",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "Buyed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "auctionId",
+          "type": "string"
+        }
+      ],
+      "name": "CancelAuction",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "tokenContract",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltyPayout",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "auctionId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalnftsaled",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "finalPrice",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "nftIds",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "auctionEnded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "auctionId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "walletAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalTax",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "paymentcurrency",
+          "type": "address"
+        }
+      ],
+      "name": "rebated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "auctionId",
+          "type": "string"
+        },
+        {
+          "internalType": "uint32",
+          "name": "endTime",
+          "type": "uint32"
+        }
+      ],
+      "name": "UpdateEndTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        }
+      ],
+      "name": "approveAdmin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionID",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "buyingAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "tax",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalBuyTokens",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "quantity1155",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32[]",
+          "name": "blacklistedProof",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "buy",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "auctionId",
+          "type": "string"
+        }
+      ],
+      "name": "cancelAuction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionID",
+          "type": "string"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "nftContractAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "startTokenId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "endTokenId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "quantity",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenOwner",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "noOfTokens",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "walletLimit",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "txnLimit",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isMint",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isInstantDeliver",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isRebate",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "enum IDutchAuction.typeOfSale",
+                  "name": "saleType",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "blacklistedBuyers",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct IDutchAuction.NftContractList",
+              "name": "collectionList",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint128",
+              "name": "startingPrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint128",
+              "name": "reservedPrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint128",
+              "name": "reducePrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint32",
+              "name": "auctionStartTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "auctionEndTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "timeForPriceDecrement",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "halfLifeTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "address",
+              "name": "paymentCurrency",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address payable",
+                  "name": "paymentSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "taxSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "commissionAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "platformSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint16",
+                  "name": "commissionFeePercentage",
+                  "type": "uint16"
+                },
+                {
+                  "internalType": "uint16",
+                  "name": "platformFeePercentage",
+                  "type": "uint16"
+                }
+              ],
+              "internalType": "struct IDutchAuction.SettlementList",
+              "name": "payoutList",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct IDutchAuction.DutchAuctionList",
+          "name": "list",
+          "type": "tuple"
+        }
+      ],
+      "name": "createOrUpdateDutchAuction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "dutchUtility",
+      "outputs": [
+        {
+          "internalType": "contract IDutchAuction",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionID",
+          "type": "string"
+        }
+      ],
+      "name": "endAuction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAdmins",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "admins",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionId",
+          "type": "string"
+        }
+      ],
+      "name": "getBuyerAddress",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "Buyers",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionId",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "BuyerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getBuyerInfo",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256[]",
+              "name": "boughtPrice",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "tokenQuantity",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "tax",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalCap",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isClaimed",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct DutchAuction.BuyerDetails",
+          "name": "buyerDetails",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionId",
+          "type": "string"
+        }
+      ],
+      "name": "getLatestSaleInfo",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "lastBoughtPrice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nextBuyToken",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "noOfBuyedTokens",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isEnded",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct DutchAuction.latestSaleDetails",
+          "name": "slaeDetails",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionId",
+          "type": "string"
+        }
+      ],
+      "name": "getListings",
+      "outputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "nftContractAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "startTokenId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "endTokenId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "quantity",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenOwner",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "noOfTokens",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "walletLimit",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "txnLimit",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isMint",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isInstantDeliver",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isRebate",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "enum IDutchAuction.typeOfSale",
+                  "name": "saleType",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "blacklistedBuyers",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct IDutchAuction.NftContractList",
+              "name": "collectionList",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint128",
+              "name": "startingPrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint128",
+              "name": "reservedPrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint128",
+              "name": "reducePrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint32",
+              "name": "auctionStartTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "auctionEndTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "timeForPriceDecrement",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "halfLifeTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "address",
+              "name": "paymentCurrency",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address payable",
+                  "name": "paymentSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "taxSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "commissionAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address payable",
+                  "name": "platformSettlementAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint16",
+                  "name": "commissionFeePercentage",
+                  "type": "uint16"
+                },
+                {
+                  "internalType": "uint16",
+                  "name": "platformFeePercentage",
+                  "type": "uint16"
+                }
+              ],
+              "internalType": "struct IDutchAuction.SettlementList",
+              "name": "payoutList",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct IDutchAuction.DutchAuctionList",
+          "name": "auctionist",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        }
+      ],
+      "name": "isAdmin",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionID",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "walletAddress",
+          "type": "address"
+        }
+      ],
+      "name": "rebate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        }
+      ],
+      "name": "revokeAdmin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "royaltySupport",
+      "outputs": [
+        {
+          "internalType": "contract IRoyaltyEngineForDutch",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "dutchAuctionID",
+          "type": "string"
+        },
+        {
+          "internalType": "uint128",
+          "name": "reservedPrice",
+          "type": "uint128"
+        }
+      ],
+      "name": "updateReservePrice",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "royaltySupportArg",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "dutchUtilityArg",
+          "type": "address"
+        }
+      ],
+      "name": "updateUtilityAndRoyaltyAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "name": "usedAuctionId",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "paymentCurrency",
+          "type": "address"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
