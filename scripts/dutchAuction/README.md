@@ -1,7 +1,7 @@
 # Dutch Auction Contract
 
 ## Introduction
-This repository folder contains the scripts to intract the smart contract of a Dutch auction. 
+This repository folder contains the scripts to interact the smart contract of a Dutch auction. 
 
 ## Features
 - Start with a high initial price and gradually decrease over time.
@@ -11,9 +11,10 @@ This repository folder contains the scripts to intract the smart contract of a D
 - Compatible with ETH and ERC20 tokens.
 
 ## Contract Address Info
--Contract Address : 0xBE6F430D96a4Ae28a3401Af5154D8fD8173F2680
--Network          : Sepolia Testnet
-
+Use following Contract Address & ABI for interact the Dutch Auction methods
+- Contract Address : 0xBE6F430D96a4Ae28a3401Af5154D8fD8173F2680
+- Network          : Sepolia Testnet
+- Abi              : Refer DutchAuctionAbi.json
 
 ## Usage
 - Place a bid: Run the buy-by-Eth.ts during the auction Period
