@@ -12,12 +12,15 @@ This repository folder contains the scripts to interact the smart contract of a 
 
 ## Contract Address Info
 Use following Contract Address & ABI for interact the Dutch Auction methods
-Dutch Auction Info
+
+=>Dutch Auction Info
+
 - Contract Address : 0xBE6F430D96a4Ae28a3401Af5154D8fD8173F2680
 - Network          : Sepolia Testnet
 - Abi              : Refer DutchAuctionAbi.json
   
-  Dutch Auction Info
+=>Dutch Auction Info
+  
 - Contract Address : 0x44092487B4B66b53E5D5f2B463B6721b7A232204
 - Network          : Sepolia Testnet
 - Abi              : Refer DutchUtilityAbi.json
