@@ -1,6 +1,16 @@
 import { ethers, network } from "hardhat";
 import { BigNumber } from "ethers";
 
+  /************ Sample Data for buy()******************************
+  
+  auctionId : "88e0d944-04ab-4ed3-9f8b-c6d2023fd6af"
+  buyingAmount : 10000000000000000
+  tax: 0
+  totalBuytoken : 1
+  quantity : 0
+  BlacklistProof : [0x0000000000000000000000000000000000000000000000000000000000000000]
+ 
+  */
 
 async function main() {
     
@@ -50,7 +60,7 @@ async function main() {
       totalBuytoken,
       quantity,
       [BlacklistProof],
-      { value: buyingAmount}
+      { value: buyingAmount+tax}
       );
 
     console.log(`\n transaction hash of buy, tx hash: ${receipt.hash}`);
@@ -67,13 +77,4 @@ main()
   });
 
 
-  /************ Sample Data for buy()******************************
-  
-  auctionId : "88e0d944-04ab-4ed3-9f8b-c6d2023fd6af"
-  buyingAmount : 10000000000000000
-  tax: 0
-  totalBuytoken : 1
-  quantity : 0
-  BlacklistProof : [0x0000000000000000000000000000000000000000000000000000000000000000]
- 
-  */
+

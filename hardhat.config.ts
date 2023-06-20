@@ -74,6 +74,12 @@ const config: HardhatUserConfig = {
       accounts: [`0x${process.env.GOERLI_PRIVATE_KEY}`],
       allowUnlimitedContractSize: true,
     },
+    sepolia: {
+      chainId: 11155111,
+      url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
+      accounts: [`0x${process.env.SEPOLIA_PRIVATE_KEY1}`],
+      allowUnlimitedContractSize: true,
+    },
   },
   etherscan: {
     apiKey: {
