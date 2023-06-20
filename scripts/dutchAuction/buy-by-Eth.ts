@@ -16,13 +16,13 @@ async function main() {
     
     // getting the reference of the deployed Dutch Auction Contract
     const Auction = await ethers.getContractAt(
-        "DutchAuctionDemo",
+        "DutchAuction",
         AuctionContractAddress
     );
 
     // getting the reference of the deployed Dutch Utility Contract
     const AuctionUtility = await ethers.getContractAt(
-      "DutchUtilityDemo",
+      "DutchUtility",
       AuctionUtilityAddress
   );
 
