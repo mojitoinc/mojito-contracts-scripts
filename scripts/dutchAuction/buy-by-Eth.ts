@@ -10,13 +10,21 @@ async function main() {
     console.log("Deploying from account:", owner.address);
   
     // Dutch Auction contract Address     
-    const AuctionContractAddress = "0xED30658e32709f2292B1fa5dc3f20951D87F4D9f"; 
-
+    const AuctionContractAddress = "0xBE6F430D96a4Ae28a3401Af5154D8fD8173F2680"; 
+    // Dutch Utility contract Address 
+    const AuctionUtilityAddress = "0x44092487B4B66b53E5D5f2B463B6721b7A232204";
+    
     // getting the reference of the deployed Dutch Auction Contract
     const Auction = await ethers.getContractAt(
         "DutchAuction",
         AuctionContractAddress
     );
+
+    // getting the reference of the deployed Dutch Utility Contract
+    const AuctionUtility = await ethers.getContractAt(
+      "DutchUtility",
+      AuctionUtilityAddress
+  );
 
     console.log("Auction Contract Deployed on :", Auction.address);
 
@@ -26,19 +34,22 @@ async function main() {
     const totalBuytoken = 1;                                                    // token count to buy
     
     // getting the current dutch auction price
-    const currentPrice= await Auction.getCurrentDutchPrice(auctionId);
+    const currentPrice= await AuctionUtility.getCurrentDutchPrice(auctionId);
 
     console.log("Current Price",currentPrice)
 
     const buyingAmount = currentPrice.mul(totalBuytoken);                       // calcualted Buying amount based on current price and no of tokens
-    
+    const tax = 0;                                                              // tax of buying Amount.
     const quantity = 0;                                                         // Quantity should be zero for ERC721
     const BlacklistProof = ethers.constants.HashZero;                           // default should be zero
     
     // call to buy the token(s)
     let receipt = await Auction.buy(
-      auctionId,buyingAmount,
-      totalBuytoken,quantity,
+      auctionId,
+      buyingAmount,
+      tax,
+      totalBuytoken,
+      quantity,
       [BlacklistProof],
       { value: buyingAmount}
       );
