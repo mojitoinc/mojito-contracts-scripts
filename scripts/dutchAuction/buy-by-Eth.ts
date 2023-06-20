@@ -1,6 +1,16 @@
 import { ethers, network } from "hardhat";
 import { BigNumber } from "ethers";
 
+  /************ Sample Data for buy()******************************
+  
+  auctionId : "88e0d944-04ab-4ed3-9f8b-c6d2023fd6af"
+  buyingAmount : 10000000000000000
+  tax: 0
+  totalBuytoken : 1
+  quantity : 0
+  BlacklistProof : [0x0000000000000000000000000000000000000000000000000000000000000000]
+ 
+  */
 
 async function main() {
     
@@ -10,37 +20,45 @@ async function main() {
     console.log("Deploying from account:", owner.address);
   
     // Dutch Auction contract Address     
-    const AuctionContractAddress = "0xED30658e32709f2292B1fa5dc3f20951D87F4D9f"; 
-
+    const AuctionContractAddress = "0xBE6F430D96a4Ae28a3401Af5154D8fD8173F2680"; 
+    // Dutch Utility contract Address 
+    const AuctionUtilityAddress = "0x44092487B4B66b53E5D5f2B463B6721b7A232204";
+    
     // getting the reference of the deployed Dutch Auction Contract
     const Auction = await ethers.getContractAt(
         "DutchAuction",
         AuctionContractAddress
     );
 
-    console.log("Auction Contract Deployed on :", Auction.address);
+    // getting the reference of the deployed Dutch Utility Contract
+    const AuctionUtility = await ethers.getContractAt(
+      "DutchUtility",
+      AuctionUtilityAddress
+  );
 
-    
+    console.log("Auction Contract Deployed on :", Auction.address);    
 
-    const auctionId = "3f594d54-e14d-40fe-99e4-c86bb3cf96";                     // Auction Id
-    const totalBuytoken = 1;                                                    // token count to buy
+    const auctionId = "2010";                                                   // Auction Id
     
     // getting the current dutch auction price
-    const currentPrice= await Auction.getCurrentDutchPrice(auctionId);
+    const currentPrice= await AuctionUtility.getCurrentDutchPrice(auctionId);
 
-    console.log("Current Price",currentPrice)
-
+    const totalBuytoken = 2;                                                    // token count to buy    
     const buyingAmount = currentPrice.mul(totalBuytoken);                       // calcualted Buying amount based on current price and no of tokens
-    const tax = 0;                                                              // default should be zero
+    const tax = 0;                                                              // tax of buying Amount.
     const quantity = 0;                                                         // Quantity should be zero for ERC721
     const BlacklistProof = ethers.constants.HashZero;                           // default should be zero
+    
+    console.log("Current Price",currentPrice.toString())
+    console.log("BuyAmount",buyingAmount.toString());
     
     // call to buy the token(s)
     let receipt = await Auction.buy(
       auctionId,
       buyingAmount,
       tax,
-      totalBuytoken,quantity,
+      totalBuytoken,
+      quantity,
       [BlacklistProof],
       { value: buyingAmount+tax}
       );
@@ -57,3 +75,6 @@ main()
     console.error(error);
     process.exit(1);
   });
+
+
+

@@ -6,6 +6,8 @@ const toTimestamp = (strDate: string | number | Date) => {
   return dt / 1000;
 };
 
+const AddressZero = "0x0000000000000000000000000000000000000000";
+
 async function main() {
   const accounts = await ethers.getSigners();
   const owner = accounts[0];
@@ -17,10 +19,10 @@ async function main() {
   const tokenStartId = 0;                           // start id, should be zero for mint
   const tokenEndId = 0;                             // end id, should be zero for mint
   const Quantity1155 = 0;                           // quantity should be zero for 721 collection nfts
-  const tokenOwnerAddress = owner.address;          // should be nft token owner address
-  const noOfTokens = 10;                            // should be the number of tokens to be minted
-  const walletLimit = 1;                            // should be mimimum walletlimit as 1
-  const transactionLimit = 1;                       // should be minimum walletlimit as 1
+  const tokenOwnerAddress = AddressZero  ;          // If mint type,should be zero Address, else nft token owner address
+  const noOfTokens = 8;                            // should be the number of tokens to be minted
+  const walletLimit = 4;                            // should be mimimum walletlimit as 1
+  const transactionLimit = 2;                       // should be minimum walletlimit as 1
   const isInstantDelivery = true;                   // default is true for current nft delivery
   const isRebate = true;                            // default is true for rebate specific
   /*
@@ -34,10 +36,10 @@ async function main() {
   const StartingPrice = ethers.utils.parseUnits("0.1", "ether") as BigNumber;   // any value in eth
   const reservedPrice = ethers.utils.parseUnits("0.001", "ether") as BigNumber; // any value in eth should be less than start price
   const reducedPrice = ethers.utils.parseUnits("0.001", "ether") as BigNumber;  // any value in eth below start price
-  const AuctionStartTime = toTimestamp("05/12/2023 10:10:00");                  // start Time of the auction should be greater current Time
-  const AuctionEndTime = toTimestamp("05/12/2023 11:00:00");                    // End Time should be greater than start Time  
-  const reducedTime = 300;                                                     // Time interval for price reduce in secends
-  const halfLifeTime = toTimestamp("05/12/2023 10:20:00");                      // half life time value
+  const AuctionStartTime = toTimestamp("06/20/2023 23:10:00");                  // start Time of the auction should be greater current Time
+  const AuctionEndTime = toTimestamp("06/20/2023 24:00:00");                    // End Time should be greater than start Time  
+  const reducedTime = 900;                                                     // Time interval for price reduce in secends
+  const halfLifeTime = toTimestamp("05/20/2023 23:30:00");                      // half life time value
 
   console.log("AuctionStartTime:", AuctionStartTime);       
   console.log("AuctionEndTime",AuctionEndTime);
@@ -46,12 +48,13 @@ async function main() {
   
   const paymentCurrency = ethers.constants.AddressZero;                          // payment currenct if eth, address zero, if ERC20, contract address of ERC20 fund
   const paymentSettlementAddress = "0xacd73aBb13630a142aD44d8f75fB7c0309fe80e8"; // Payment settlement address should not be zero
+  const taxSettlementAddress = "0x698C2F5E4b29C90A78eF69DBED39C1c826c99c60"      // Tax Settlement Address
   const commissionAddress = "0x3c65AFAF9115C8B6b6240113713449cf1c67a42A";        // commission Address
   const platformSettlementAddress = "0xacd73aBb13630a142aD44d8f75fB7c0309fe80e8";// platform Settlement Address
   const CommessionFee = 1000;                                                    // commession fee percentage in basic points
   const platformFee = 1500;                                                      // platform fee percentage in basic points
 
-  const AuctionContractAddress = "0xED30658e32709f2292B1fa5dc3f20951D87F4D9f";   // Dutch Auction contract Address
+  const AuctionContractAddress = "0x4074e265654017490d4bbd72b83863ce44355d41";   // Dutch Auction contract Address
   
   // getting the reference of the deployed Dutch Auction Contract
   const Auction = await ethers.getContractAt(
@@ -91,17 +94,17 @@ async function main() {
     paymentCurrency,
     [
       paymentSettlementAddress,
+      taxSettlementAddress,
       commissionAddress,
       platformSettlementAddress,
       CommessionFee,
       platformFee,
     ],
-  ];
-
+  ];  
 
   // call to create the dutch auction 
-  let receipt = await Auction.CreateDutchAuction(
-    "3f594d54-e14d-40fe-99e4-c86bb3cf96",
+  let receipt = await Auction.createOrUpdateDutchAuction(
+    "2000",
     bidInfo
   );
   console.log(`\n transaction hash of created sale, tx hash: ${receipt.hash}`);
