@@ -16,32 +16,31 @@ async function main() {
     
     // getting the reference of the deployed Dutch Auction Contract
     const Auction = await ethers.getContractAt(
-        "DutchAuction",
+        "DutchAuctionDemo",
         AuctionContractAddress
     );
 
     // getting the reference of the deployed Dutch Utility Contract
     const AuctionUtility = await ethers.getContractAt(
-      "DutchUtility",
+      "DutchUtilityDemo",
       AuctionUtilityAddress
   );
 
-    console.log("Auction Contract Deployed on :", Auction.address);
+    console.log("Auction Contract Deployed on :", Auction.address);    
 
-    
-
-    const auctionId = "3f594d54-e14d-40fe-99e4-c86bb3cf96";                     // Auction Id
-    const totalBuytoken = 1;                                                    // token count to buy
+    const auctionId = "2010";                                                   // Auction Id
     
     // getting the current dutch auction price
     const currentPrice= await AuctionUtility.getCurrentDutchPrice(auctionId);
 
-    console.log("Current Price",currentPrice)
-
+    const totalBuytoken = 2;                                                    // token count to buy    
     const buyingAmount = currentPrice.mul(totalBuytoken);                       // calcualted Buying amount based on current price and no of tokens
     const tax = 0;                                                              // tax of buying Amount.
     const quantity = 0;                                                         // Quantity should be zero for ERC721
     const BlacklistProof = ethers.constants.HashZero;                           // default should be zero
+    
+    console.log("Current Price",currentPrice.toString())
+    console.log("BuyAmount",buyingAmount.toString());
     
     // call to buy the token(s)
     let receipt = await Auction.buy(
@@ -66,3 +65,15 @@ main()
     console.error(error);
     process.exit(1);
   });
+
+
+  /************ Sample Data for buy()******************************
+  
+  auctionId : "88e0d944-04ab-4ed3-9f8b-c6d2023fd6af"
+  buyingAmount : 10000000000000000
+  tax: 0
+  totalBuytoken : 1
+  quantity : 0
+  BlacklistProof : [0x0000000000000000000000000000000000000000000000000000000000000000]
+ 
+  */
