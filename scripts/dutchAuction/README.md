@@ -25,6 +25,22 @@ Use following Contract Address & ABI for interact the Dutch Auction methods
 - Network          : Sepolia Testnet
 - Abi              : Refer DutchUtilityAbi.json
 
+## Contract Address (Latest) Info
+Use following Contract Address & ABI for interact the Dutch Auction methods
+
+=>Dutch Auction Info
+
+- Contract Address : 0x30a32FBA51E2edFdF124c4ff9Bc3824384DB8B1f
+- Network          : Sepolia Testnet
+- Abi              : Refer DutchAuctionAbi.json
+  
+=>Dutch Auction Info
+  
+- Contract Address : 0xa830628c31D3647a73585eECD7008cdb7C97d994
+- Network          : Sepolia Testnet
+- Abi              : Refer DutchUtilityAbi.json
+
+
 ## Usage
 - Place a bid: Run the buy-by-Eth.ts during the auction Period
 - Rebate     : Run the rebate.ts. after the end of auction
