@@ -8,7 +8,12 @@ import { BigNumber } from "ethers";
   tax: 0
   totalBuytoken : 1
   quantity : 0
-  BlacklistProof : [0x0000000000000000000000000000000000000000000000000000000000000000]
+  BlacklistProof : [0x0000000000000000000000000000000000000000000000000000000000000000]  
+  discountPercentage :0
+  expirationTime :1689445810
+  nonce :12
+  signature :0x31957e90f3eb784a8b38a19aea3fe346ee435dc999f4652042b8ab376ea791712c779224a39c9557be0d5e3ccfd116c3c182dac89b0580903250f9fc7512e6351b
+  signer:0xe3d32951C8BA72198207c2F36913aFA5ccA39476
  
   */
 
@@ -20,9 +25,9 @@ async function main() {
     console.log("Deploying from account:", owner.address);
   
     // Dutch Auction contract Address     
-    const AuctionContractAddress = "0xBE6F430D96a4Ae28a3401Af5154D8fD8173F2680"; 
+    const AuctionContractAddress = "0x30a32FBA51E2edFdF124c4ff9Bc3824384DB8B1f"; 
     // Dutch Utility contract Address 
-    const AuctionUtilityAddress = "0x44092487B4B66b53E5D5f2B463B6721b7A232204";
+    const AuctionUtilityAddress = "0xa830628c31D3647a73585eECD7008cdb7C97d994";
     
     // getting the reference of the deployed Dutch Auction Contract
     const Auction = await ethers.getContractAt(
@@ -48,6 +53,11 @@ async function main() {
     const tax = 0;                                                              // tax of buying Amount.
     const quantity = 0;                                                         // Quantity should be zero for ERC721
     const BlacklistProof = ethers.constants.HashZero;                           // default should be zero
+    const discountPercentage = 0;                                               // Default should be zero
+    const expirationTime = 1689445810;                                          // TimeStamp Value
+    const nonce = 12;                                                           // Nonce infomation 
+    const signature ="0x31957e90f3eb784a8b38a19aea3fe346ee435dc999f4652042b8ab376ea791712c779224a39c9557be0d5e3ccfd116c3c182dac89b0580903250f9fc7512e6351b" // Admin Signature 
+    const signer ="0xe3d32951C8BA72198207c2F36913aFA5ccA39476";                 // The signer Address
     
     console.log("Current Price",currentPrice.toString())
     console.log("BuyAmount",buyingAmount.toString());
@@ -60,6 +70,7 @@ async function main() {
       totalBuytoken,
       quantity,
       [BlacklistProof],
+      [discountPercentage,expirationTime,nonce,signature,signer],
       { value: buyingAmount+tax}
       );
 

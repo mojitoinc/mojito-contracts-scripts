@@ -25,6 +25,7 @@ async function main() {
   const transactionLimit = 2;                       // should be minimum walletlimit as 1
   const isInstantDelivery = true;                   // default is true for current nft delivery
   const isRebate = true;                            // default is true for rebate specific
+  const isSignerRequied = false                      // default is true. In this Case,Admin signature required to buy the NFT
   /*
     saletype
     0 - erc_721_nft_type
@@ -36,10 +37,10 @@ async function main() {
   const StartingPrice = ethers.utils.parseUnits("0.1", "ether") as BigNumber;   // any value in eth
   const reservedPrice = ethers.utils.parseUnits("0.001", "ether") as BigNumber; // any value in eth should be less than start price
   const reducedPrice = ethers.utils.parseUnits("0.001", "ether") as BigNumber;  // any value in eth below start price
-  const AuctionStartTime = toTimestamp("06/20/2023 23:10:00");                  // start Time of the auction should be greater current Time
-  const AuctionEndTime = toTimestamp("06/20/2023 24:00:00");                    // End Time should be greater than start Time  
+  const AuctionStartTime = toTimestamp("07/15/2023 03:29:00");                  // start Time of the auction should be greater current Time
+  const AuctionEndTime = toTimestamp("07/16/2023 24:00:00");                    // End Time should be greater than start Time  
   const reducedTime = 900;                                                     // Time interval for price reduce in secends
-  const halfLifeTime = toTimestamp("05/20/2023 23:30:00");                      // half life time value
+  const halfLifeTime = toTimestamp("07/16/2023 24:00:00");                      // half life time value
 
   console.log("AuctionStartTime:", AuctionStartTime);       
   console.log("AuctionEndTime",AuctionEndTime);
@@ -54,7 +55,7 @@ async function main() {
   const CommessionFee = 1000;                                                    // commession fee percentage in basic points
   const platformFee = 1500;                                                      // platform fee percentage in basic points
 
-  const AuctionContractAddress = "0x4074e265654017490d4bbd72b83863ce44355d41";   // Dutch Auction contract Address
+  const AuctionContractAddress = "0x30a32FBA51E2edFdF124c4ff9Bc3824384DB8B1f";   // Dutch Auction contract Address
   
   // getting the reference of the deployed Dutch Auction Contract
   const Auction = await ethers.getContractAt(
@@ -77,6 +78,7 @@ async function main() {
     isMint,
     isInstantDelivery,
     isRebate,
+    isSignerRequied,
     saleType,
     BlacklistedRoot,
   ];
@@ -105,7 +107,8 @@ async function main() {
   // call to create the dutch auction 
   let receipt = await Auction.createOrUpdateDutchAuction(
     "2000",
-    bidInfo
+    bidInfo,
+    {gasLimit: 500000}
   );
   console.log(`\n transaction hash of created sale, tx hash: ${receipt.hash}`);
   console.log("Waiting for confirmations...");
@@ -119,5 +122,3 @@ main()
     console.error(error.error);
     process.exit(1);
   });
-
-
