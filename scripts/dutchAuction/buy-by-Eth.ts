@@ -71,7 +71,7 @@ async function main() {
       quantity,
       [BlacklistProof],
       [discountPercentage,expirationTime,nonce,signature,signer],
-      { value: buyingAmount+tax}
+      { value: buyingAmount.add(tax)}
       );
 
     console.log(`\n transaction hash of buy, tx hash: ${receipt.hash}`);
