@@ -17,9 +17,15 @@ const contract = new web3.eth.Contract(contractABI, NftCollectionAddress);
 // Function to interact with the smart contract without sendTransaction
 async function interactWithContract() {
   try {
+    const network = await web3.eth.net.getId()
+    const accounts = await web3.eth.getAccounts();
+
+    console.log("networkChainId =", network);
+    console.log("NFT Contract Contract Deployed on :", NftCollectionAddress);
+    
     const owner = "0xacd73aBb13630a142aD44d8f75fB7c0309fe80e8";      // Token Owner Address
     const operator = "0xacd73aBb13630a142aD44d8f75fB7c0309fe80e8"   // operator address
-    
+
     // Call the write function (send transaction)    
     const result = await contract.methods.isApprovedForAll(owner, operator).call();
     console.log('Result of isApprovedForAll:', result);
