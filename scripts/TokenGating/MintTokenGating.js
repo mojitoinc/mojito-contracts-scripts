@@ -6,7 +6,7 @@ const TokenGatingAbi = require('./TokenGatingAbi.json');
 
 async function main() {
 
-const TokenGatingAddress = "0x5DFd556d517C50FA38E232Ab6F5B86744C440D6f";
+const TokenGatingAddress = "0x35710b52C3ED6c3d5fb0D8FDE89b87254e1E7b2b";
 
 
 // Connect to the network using the ABI and the signer 
