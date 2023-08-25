@@ -2,7 +2,7 @@
   {
     "inputs": [
       {
-        "internalType": "contract IRoyaltyEngineForDutch",
+        "internalType": "contract IRoyaltyEngine",
         "name": "_royaltySupport",
         "type": "address"
       },
@@ -83,7 +83,7 @@
               },
               {
                 "internalType": "uint256",
-                "name": "quantity",
+                "name": "unit1155",
                 "type": "uint256"
               },
               {
@@ -112,6 +112,11 @@
                 "type": "bool"
               },
               {
+                "internalType": "int256",
+                "name": "maxTokenIDRange",
+                "type": "int256"
+              },
+              {
                 "internalType": "bool",
                 "name": "isInstantDeliver",
                 "type": "bool"
@@ -119,6 +124,11 @@
               {
                 "internalType": "bool",
                 "name": "isRebate",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "isDiscountRequired",
                 "type": "bool"
               },
               {
@@ -227,7 +237,7 @@
       {
         "indexed": false,
         "internalType": "string",
-        "name": "CreatedOrUpdated",
+        "name": "createdOrUpdated",
         "type": "string"
       }
     ],
@@ -246,7 +256,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "totalNftSaled",
+        "name": "soldQuantity",
         "type": "uint256"
       },
       {
@@ -277,13 +287,13 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "totalBuyTokens",
+        "name": "quantity",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "Quantity1155",
+        "name": "unit1155",
         "type": "uint256"
       },
       {
@@ -295,7 +305,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "buyingPrice",
+        "name": "price",
         "type": "uint256"
       },
       {
@@ -318,18 +328,12 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "remainingTokens",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
         "internalType": "uint256[]",
         "name": "tokenIds",
         "type": "uint256[]"
       }
     ],
-    "name": "Buyed",
+    "name": "BuyExecuted",
     "type": "event"
   },
   {
@@ -401,25 +405,25 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "walletAddress",
+        "name": "buyer",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "totalAmount",
+        "name": "rebateAmount",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "totalTax",
+        "name": "rebateTax",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "address",
-        "name": "paymentcurrency",
+        "name": "paymentCurrency",
         "type": "address"
       }
     ],
@@ -469,7 +473,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "amount",
+        "name": "shares",
         "type": "uint256"
       }
     ],
@@ -529,7 +533,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "buyingAmount",
+        "name": "price",
         "type": "uint256"
       },
       {
@@ -539,12 +543,12 @@
       },
       {
         "internalType": "uint256",
-        "name": "totalBuyTokens",
+        "name": "quantity",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "quantity1155",
+        "name": "unit1155",
         "type": "uint256"
       },
       {
@@ -631,7 +635,7 @@
               },
               {
                 "internalType": "uint256",
-                "name": "quantity",
+                "name": "unit1155",
                 "type": "uint256"
               },
               {
@@ -660,6 +664,11 @@
                 "type": "bool"
               },
               {
+                "internalType": "int256",
+                "name": "maxTokenIDRange",
+                "type": "int256"
+              },
+              {
                 "internalType": "bool",
                 "name": "isInstantDeliver",
                 "type": "bool"
@@ -667,6 +676,11 @@
               {
                 "internalType": "bool",
                 "name": "isRebate",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "isDiscountRequired",
                 "type": "bool"
               },
               {
@@ -847,7 +861,7 @@
     "outputs": [
       {
         "internalType": "address[]",
-        "name": "Buyers",
+        "name": "buyers",
         "type": "address[]"
       }
     ],
@@ -863,7 +877,7 @@
       },
       {
         "internalType": "address",
-        "name": "BuyerAddress",
+        "name": "buyer",
         "type": "address"
       }
     ],
@@ -873,12 +887,12 @@
         "components": [
           {
             "internalType": "uint256[]",
-            "name": "boughtPrice",
+            "name": "price",
             "type": "uint256[]"
           },
           {
             "internalType": "uint256[]",
-            "name": "tokenQuantity",
+            "name": "quantity",
             "type": "uint256[]"
           },
           {
@@ -888,17 +902,17 @@
           },
           {
             "internalType": "uint256[]",
-            "name": "boughtPriceWithDiscount",
+            "name": "priceDiscount",
             "type": "uint256[]"
           },
           {
             "internalType": "uint256[]",
-            "name": "tokenQuantityWithDiscount",
+            "name": "quantityDiscount",
             "type": "uint256[]"
           },
           {
             "internalType": "uint256[]",
-            "name": "taxWithDiscount",
+            "name": "taxDiscount",
             "type": "uint256[]"
           },
           {
@@ -908,7 +922,7 @@
           },
           {
             "internalType": "bool",
-            "name": "isClaimed",
+            "name": "rebateClaimed",
             "type": "bool"
           }
         ],
@@ -934,32 +948,32 @@
         "components": [
           {
             "internalType": "uint256",
-            "name": "lastBoughtPrice",
+            "name": "finalPrice",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "nextBuyToken",
+            "name": "nextTokenId",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "noOfBuyedTokens",
+            "name": "currentSupply",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "fullDiscountedTokens",
+            "name": "fullDiscountSupply",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "zeroDiscountedTokens",
+            "name": "zeroDiscountSupply",
             "type": "uint256"
           },
           {
             "internalType": "bool",
-            "name": "isEnded",
+            "name": "auctionEnded",
             "type": "bool"
           }
         ],
@@ -1002,7 +1016,7 @@
               },
               {
                 "internalType": "uint256",
-                "name": "quantity",
+                "name": "unit1155",
                 "type": "uint256"
               },
               {
@@ -1031,6 +1045,11 @@
                 "type": "bool"
               },
               {
+                "internalType": "int256",
+                "name": "maxTokenIDRange",
+                "type": "int256"
+              },
+              {
                 "internalType": "bool",
                 "name": "isInstantDeliver",
                 "type": "bool"
@@ -1038,6 +1057,11 @@
               {
                 "internalType": "bool",
                 "name": "isRebate",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "isDiscountRequired",
                 "type": "bool"
               },
               {
@@ -1187,7 +1211,7 @@
       },
       {
         "internalType": "address",
-        "name": "walletAddress",
+        "name": "buyer",
         "type": "address"
       }
     ],
@@ -1221,7 +1245,7 @@
     "name": "royaltySupport",
     "outputs": [
       {
-        "internalType": "contract IRoyaltyEngineForDutch",
+        "internalType": "contract IRoyaltyEngine",
         "name": "",
         "type": "address"
       }
