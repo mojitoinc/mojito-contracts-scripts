@@ -59,7 +59,7 @@
               },
               {
                 "internalType": "uint256",
-                "name": "quantity",
+                "name": "unit1155",
                 "type": "uint256"
               },
               {
@@ -88,6 +88,11 @@
                 "type": "bool"
               },
               {
+                "internalType": "int256",
+                "name": "maxTokenIDRange",
+                "type": "int256"
+              },
+              {
                 "internalType": "bool",
                 "name": "isInstantDeliver",
                 "type": "bool"
@@ -95,6 +100,11 @@
               {
                 "internalType": "bool",
                 "name": "isRebate",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "isDiscountRequired",
                 "type": "bool"
               },
               {
@@ -213,70 +223,88 @@
         "type": "string"
       },
       {
-        "internalType": "uint256",
-        "name": "buyingAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "tax",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "totalBuyTokens",
-        "type": "uint256"
-      },
-      {
         "internalType": "address",
         "name": "buyer",
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "quantity1155",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bytes32[]",
-        "name": "blacklistedProof",
-        "type": "bytes32[]"
-      },
-      {
         "components": [
           {
-            "internalType": "uint16",
-            "name": "discountPercentage",
-            "type": "uint16"
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
           },
           {
-            "internalType": "uint32",
-            "name": "expirationTime",
-            "type": "uint32"
+            "internalType": "uint256",
+            "name": "tax",
+            "type": "uint256"
           },
           {
-            "internalType": "string",
-            "name": "nonce",
-            "type": "string"
+            "internalType": "uint256",
+            "name": "quantity",
+            "type": "uint256"
           },
           {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
+            "internalType": "uint256",
+            "name": "unit1155",
+            "type": "uint256"
           },
           {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
+            "internalType": "bytes32[]",
+            "name": "blacklistedProof",
+            "type": "bytes32[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint16",
+                "name": "discountPercentage",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "expirationTime",
+                "type": "uint32"
+              },
+              {
+                "internalType": "string",
+                "name": "nonce",
+                "type": "string"
+              },
+              {
+                "internalType": "bytes",
+                "name": "signature",
+                "type": "bytes"
+              },
+              {
+                "internalType": "address",
+                "name": "signer",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct IDutchAuction.Discount",
+            "name": "discount",
+            "type": "tuple"
           }
         ],
-        "internalType": "struct IDutchAuction.Discount",
-        "name": "discount",
+        "internalType": "struct IDutchAuction.BuyList",
+        "name": "buyList",
         "type": "tuple"
       }
     ],
     "name": "__buyValidation",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "refundAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "refundTax",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -289,7 +317,7 @@
       },
       {
         "internalType": "address",
-        "name": "BuyerWallet",
+        "name": "buyer",
         "type": "address"
       }
     ],
@@ -302,7 +330,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "totalTax",
+        "name": "totalTaxClaimable",
         "type": "uint256"
       }
     ],
