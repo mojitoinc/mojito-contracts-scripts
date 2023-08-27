@@ -5,7 +5,7 @@ const RedeemableAbi = require('./RedeemableAbi.json');
 async function main() {
 
   // Replace with the actual Redeemable contract address
-  const RedeemableAddress = '0xc830E706eABBd9A4F2F7Ed309E5B519a3073d5f2';
+  const RedeemableAddress = '0xCCFb503fF9C58F088ce98c06Fc695057cA157C6c';
 
   // Connect to the network using the ABI and the signer 
   const provider = new ethers.providers.JsonRpcProvider(process.env.SEPOLIA_RPC_URL);
@@ -28,6 +28,11 @@ async function main() {
   const claimer = "0xacd73aBb13630a142aD44d8f75fB7c0309fe80e8";                    // Pass claimer wallet address 
   const quantity = 0;                                                              // Pass quanity if ERC1155
   const tokenURI = ""                                                              // Pass Uri to set in claimable token
+ 
+  const expirationTime = 1689445810;                                               // TimeStamp Value
+  const nonce = 12;                                                                // Nonce infomation 
+  const signature = "0x31957e90f3eb784a8b38a19aea3fe346ee435dc999f4652042b8ab376ea791712c779224a39c9557be0d5e3ccfd116c3c182dac89b0580903250f9fc7512e6351b" // Admin Signature 
+  const signer = "0xe3d32951C8BA72198207c2F36913aFA5ccA39476";                     // The signer Address
 
   // Call to Redeem the NFT
   const Tx = await Redeemable.redeem(
@@ -35,7 +40,8 @@ async function main() {
     tokenId,
     claimer,
     quantity,
-    tokenURI
+    tokenURI,
+    [expirationTime,nonce,signature,signer]
   );
 
   console.log(`\n transaction hash of redeem: ${Tx.hash}`);
