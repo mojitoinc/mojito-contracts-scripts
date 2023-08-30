@@ -47,6 +47,8 @@ async function main() {
     buyer,
     paymentToken,
     price,
+    ethers.constants.AddressZero, 
+    0,
   ];
   const discount = [
     discountpercentage,
