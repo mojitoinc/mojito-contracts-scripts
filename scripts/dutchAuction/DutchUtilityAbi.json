@@ -383,6 +383,35 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "dutchAuctionId",
+        "type": "string"
+      },
+      {
+        "internalType": "int256",
+        "name": "timeStamp",
+        "type": "int256"
+      }
+    ],
+    "name": "getDutchAuctionPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "timeStampValue",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "dutchAuction",
         "type": "address"
