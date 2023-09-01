@@ -361,12 +361,6 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "endTimeOld",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
         "name": "endTimeNew",
         "type": "uint256"
       }
@@ -442,12 +436,6 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "reservePriceOld",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
         "name": "reservePriceNew",
         "type": "uint256"
       }
@@ -486,19 +474,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "dutchUtilityOld",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
         "name": "dutchUtilityNew",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "royaltySupportOld",
         "type": "address"
       },
       {
@@ -829,6 +805,11 @@
         "internalType": "string",
         "name": "dutchAuctionID",
         "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "isPriceAsReserve",
+        "type": "bool"
       }
     ],
     "name": "endAuction",
