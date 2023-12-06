@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "maxQuantity",
+        "name": "_maxQuantity",
         "type": "uint256"
       },
       {
@@ -311,29 +311,13 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "TokenList",
+    "inputs": [],
+    "name": "adminApprovalRequired",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "tokenIds",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "CollectionAddress",
-        "type": "address"
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -410,37 +394,6 @@
         "internalType": "address[]",
         "name": "admins",
         "type": "address[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "walletAddress",
-        "type": "address"
-      }
-    ],
-    "name": "getRedeem",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "tokenIds",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "CollectionAddress",
-            "type": "address"
-          }
-        ],
-        "internalType": "struct Redeemable.nftIds[]",
-        "name": "list",
-        "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
@@ -534,13 +487,7 @@
       }
     ],
     "name": "redeem",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "nftTokenId",
-        "type": "uint256[]"
-      }
-    ],
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -661,6 +608,32 @@
       }
     ],
     "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "_adminApprovalRequired",
+        "type": "bool"
+      }
+    ],
+    "name": "updateAdminApproval",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_maxQuantity",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateMaxQuantity",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
