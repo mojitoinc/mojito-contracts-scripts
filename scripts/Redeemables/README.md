@@ -8,7 +8,7 @@ This contract, which has been designed to facilitate the exchange of tokens for 
 
 
 ## Contract Address Info
--Contract Address : 
+-Contract Address : 0x9a0555452c9e7129Af0bba1768EfD708741a107d
 -Network          : Sepolia Testnet
 -Abi              : Refer RedeemableAbi.json
 

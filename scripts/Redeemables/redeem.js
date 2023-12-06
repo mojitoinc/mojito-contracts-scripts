@@ -5,7 +5,7 @@ const RedeemableAbi = require('./RedeemableAbi.json');
 async function main() {
 
   // Replace with the actual Redeemable contract address
-  const RedeemableAddress = '0xCCFb503fF9C58F088ce98c06Fc695057cA157C6c';
+  const RedeemableAddress = '0x9a0555452c9e7129Af0bba1768EfD708741a107d';
 
   // Connect to the network using the ABI and the signer 
   const provider = new ethers.providers.JsonRpcProvider(process.env.SEPOLIA_RPC_URL);
