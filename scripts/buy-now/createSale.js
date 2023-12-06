@@ -40,7 +40,7 @@ async function main() {
   const platformSettlementAddress = "0xacd73aBb13630a142aD44d8f75fB7c0309fe80e8";// platform Settlement Address
   const CommessionFee = 1000;                                                    // commession fee percentage in basic points
   const platformFee = 1500;                                                      // platform fee percentage in basic points
- 
+  const TokenGatingContract = ethers.constants.AddressZero;                      // Required only for token gating set up, currently address zero 
   
   const saleList = [
     nftStartTokenId,
@@ -52,7 +52,8 @@ async function main() {
     paymentCurrency,
     [paymentSettlementAddress,taxSettlementAddress,commissionAddress,platformSettlementAddress,CommessionFee,platformFee],
     transactionStatus,
-    paymentStatus
+    paymentStatus,
+    TokenGatingContract
   ];
   
 

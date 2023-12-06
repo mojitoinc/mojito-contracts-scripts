@@ -25,6 +25,11 @@
           "internalType": "contract IRoyaltyEngine",
           "name": "_royaltycontract",
           "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "_adminApprovalRequired",
+          "type": "bool"
         }
       ],
       "stateMutability": "nonpayable",
@@ -118,10 +123,20 @@
               "internalType": "uint256",
               "name": "paymentAmount",
               "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "gatedColletion",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gatedTokenId",
+              "type": "uint256"
             }
           ],
           "indexed": false,
-          "internalType": "struct OnchainBuyV1_1.BuyList",
+          "internalType": "struct OnchainBuy.BuyList",
           "name": "buyingDetails",
           "type": "tuple"
         },
@@ -289,23 +304,28 @@
                   "type": "uint16"
                 }
               ],
-              "internalType": "struct OnchainBuyV1_1.settlementList",
+              "internalType": "struct OnchainBuy.settlementList",
               "name": "paymentSettlement",
               "type": "tuple"
             },
             {
-              "internalType": "enum OnchainBuyV1_1.TransactionStatus",
+              "internalType": "enum OnchainBuy.TransactionStatus",
               "name": "transactionStatus",
               "type": "uint8"
             },
             {
-              "internalType": "enum OnchainBuyV1_1.PaymentStatus",
+              "internalType": "enum OnchainBuy.PaymentStatus",
               "name": "paymentStatus",
               "type": "uint8"
+            },
+            {
+              "internalType": "address",
+              "name": "tokenGatingContract",
+              "type": "address"
             }
           ],
           "indexed": false,
-          "internalType": "struct OnchainBuyV1_1.PriceList",
+          "internalType": "struct OnchainBuy.PriceList",
           "name": "saleList",
           "type": "tuple"
         },
@@ -379,9 +399,19 @@
               "internalType": "uint256",
               "name": "paymentAmount",
               "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "gatedColletion",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gatedTokenId",
+              "type": "uint256"
             }
           ],
-          "internalType": "struct OnchainBuyV1_1.BuyList",
+          "internalType": "struct OnchainBuy.BuyList",
           "name": "list",
           "type": "tuple"
         },
@@ -418,7 +448,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct OnchainBuyV1_1.Discount",
+          "internalType": "struct OnchainBuy.Discount",
           "name": "discount",
           "type": "tuple"
         }
@@ -519,22 +549,27 @@
                   "type": "uint16"
                 }
               ],
-              "internalType": "struct OnchainBuyV1_1.settlementList",
+              "internalType": "struct OnchainBuy.settlementList",
               "name": "paymentSettlement",
               "type": "tuple"
             },
             {
-              "internalType": "enum OnchainBuyV1_1.TransactionStatus",
+              "internalType": "enum OnchainBuy.TransactionStatus",
               "name": "transactionStatus",
               "type": "uint8"
             },
             {
-              "internalType": "enum OnchainBuyV1_1.PaymentStatus",
+              "internalType": "enum OnchainBuy.PaymentStatus",
               "name": "paymentStatus",
               "type": "uint8"
+            },
+            {
+              "internalType": "address",
+              "name": "tokenGatingContract",
+              "type": "address"
             }
           ],
-          "internalType": "struct OnchainBuyV1_1.PriceList",
+          "internalType": "struct OnchainBuy.PriceList",
           "name": "list",
           "type": "tuple"
         },
@@ -754,19 +789,24 @@
               "type": "uint16"
             }
           ],
-          "internalType": "struct OnchainBuyV1_1.settlementList",
+          "internalType": "struct OnchainBuy.settlementList",
           "name": "paymentSettlement",
           "type": "tuple"
         },
         {
-          "internalType": "enum OnchainBuyV1_1.TransactionStatus",
+          "internalType": "enum OnchainBuy.TransactionStatus",
           "name": "transactionStatus",
           "type": "uint8"
         },
         {
-          "internalType": "enum OnchainBuyV1_1.PaymentStatus",
+          "internalType": "enum OnchainBuy.PaymentStatus",
           "name": "paymentStatus",
           "type": "uint8"
+        },
+        {
+          "internalType": "address",
+          "name": "tokenGatingContract",
+          "type": "address"
         }
       ],
       "stateMutability": "view",
@@ -801,6 +841,19 @@
         }
       ],
       "name": "revokeAdmin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "approval",
+          "type": "bool"
+        }
+      ],
+      "name": "setAdminApproval",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

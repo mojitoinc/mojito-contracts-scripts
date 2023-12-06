@@ -31,7 +31,8 @@ async function main() {
   const paymentToken = ethers.constants.AddressZero;           // pass Payment token address,if eth, address zero, if ERC20, contract address of ERC20 fund 
   const price = ethers.utils.parseUnits("0.1", "ether");       // pass the amount(WEI) in to buy the nft 
   const tax = ethers.utils.parseUnits("0", "ether");           // pass the amount if to pay any tax
-
+  const gatedColletion = ethers.constants.AddressZero;         // pass the token gating contract default it is zero
+  const gatedTokenId = 0;                                      // pass the token gating token Id for defaule pass zero address
   // pass the data if allowing any discount to buyer
   const discountpercentage = 0                                 // pass the discount percentage if not pass zero
   const expirationTime = 0;                                    // pass the time of expiry in timestamp if not pass zero
@@ -47,6 +48,8 @@ async function main() {
     buyer,
     paymentToken,
     price,
+    gatedColletion,
+    gatedTokenId
   ];
   const discount = [
     discountpercentage,
