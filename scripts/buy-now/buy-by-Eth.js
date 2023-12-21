@@ -39,6 +39,7 @@ async function main() {
   const nonce = "0";                                           // pass the nonce if we have any if not pass it empty
   const signer = ethers.constants.AddressZero;                 // pass the signer address
   const signature = ethers.constants.AddressZero               // pass the signature from admin 
+  const tokenUri = ['']                                        // pass the nft token metadata if not pass empty string
   const buyList = [
     saleId,
     tokenOwner,
@@ -46,6 +47,7 @@ async function main() {
     quantity,
     quantity1155,    
     buyer,
+    tokenUri,   
     paymentToken,
     price,
     gatedColletion,
